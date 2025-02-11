@@ -61,20 +61,20 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 if (process.env.NODE_ENV === "production") {
-  // Serve static files with proper MIME types
+  // Serve static files with proper MIME types and caching
   app.use(express.static(join(__dirname, 'public'), {
     setHeaders: (res, path) => {
       if (path.endsWith('.css')) {
         res.setHeader('Content-Type', 'text/css');
+        res.setHeader('Cache-Control', 'public, max-age=31536000'); // 1 year
+      } else if (path.endsWith('.js')) {
+        res.setHeader('Cache-Control', 'public, max-age=31536000');
       }
     }
   }));
   
   // Handle all other routes by serving index.html
   app.get('*', (req, res) => {
-    if (req.headers.accept?.includes('text/css')) {
-      res.setHeader('Content-Type', 'text/css');
-    }
     res.sendFile(join(__dirname, 'public', 'index.html'));
   });
 }
