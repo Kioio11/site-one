@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+  }
+
+  * {
+    @apply border-[hsl(var(--border))];
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  /* Spotlight hover effect */
+  .radial-gradient {
+    background: radial-gradient(
+      800px circle at var(--mouse-x) var(--mouse-y),
+      var(--gradient-start),
+      var(--gradient-end)
+    );
+  }
+
+  /* Add spotlight hover animation effect */
+  .spotlight-hover {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .spotlight-hover::before {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+    inset: -100%;
+    width: 300%;
+    height: 300%;
+    background: radial-gradient(
+      circle at var(--mouse-x) var(--mouse-y),
+      theme('colors.primary.DEFAULT / 0.15'),
+      transparent 40%
+    );
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .spotlight-hover:hover::before {
+    opacity: 1;
+  }
+}
