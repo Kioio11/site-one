@@ -20,14 +20,15 @@ export default defineConfig({
     outDir: path.resolve(__dirname, "dist/public"),
     emptyOutDir: true,
     assetsDir: "assets",
+    cssCodeSplit: false,
     rollupOptions: {
       output: {
         manualChunks: undefined,
         assetFileNames: (assetInfo) => {
           if (assetInfo.name && assetInfo.name.endsWith('.css')) {
-            return 'assets/[name].[hash].css';
+            return 'assets/style.[hash].css';
           }
-          return 'assets/[name].[ext]';
+          return 'assets/[name].[hash][extname]';
         },
         chunkFileNames: "assets/[name].[hash].js",
         entryFileNames: "assets/[name].[hash].js",
