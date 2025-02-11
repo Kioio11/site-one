@@ -1,7 +1,7 @@
+import "./index.css"; // Make sure this is at the top
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App";
-import "./index.css";
 
 const root = document.getElementById("root");
 if (!root) {
